@@ -18,10 +18,33 @@ export async function model(context: IApplicationContext) {
     mongoose: { Schema },
     connection,
   } = mongooseConnection;
-  const schema = new Schema(
+
+  const component = new Schema(
     {
       name: {
         type: String,
+      },
+      cover: {
+        type: String,
+      },
+      mschema: {
+        type: Object,
+      },
+    },
+    {
+      timestamps: true,
+    }
+  );
+
+  const schema = new Schema(
+    {
+      categoryName: {
+        type: String,
+        required: true,
+      },
+      children: {
+        type: [component],
+        default: [],
       },
     },
     {
