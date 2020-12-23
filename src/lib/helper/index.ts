@@ -1,4 +1,5 @@
 import { Inject, Provide } from '@midwayjs/decorator';
+import { ErrorShowType } from '../../app/types/common';
 
 @Provide()
 export class Helper {
@@ -7,18 +8,20 @@ export class Helper {
    */
   success(data: object = {}) {
     return {
-      code: 0,
+      success: true,
       data,
+      showType: ErrorShowType.SILENT,
     };
   }
 
   /**
    * 接口返回失败
    */
-  error(errmsg: string, code?: number) {
+  error(errorMessage: string, showType?: ErrorShowType) {
     return {
-      code: code !== undefined ? code : 2001,
-      errmsg,
+      success: false,
+      errorMessage,
+      showType: showType || ErrorShowType.ERROR_MESSAGE,
     };
   }
 }

@@ -38,6 +38,17 @@ export class ComponentController {
   }
 
   /**
+   * 查询分类
+   */
+  @Post('/category/list')
+  async queryCategoryList(@Body() categoryName: string) {
+    const result = await this.componentService.queryCategoryList({
+      categoryName,
+    });
+    return this.helper.success(result);
+  }
+
+  /**
    * 新增组件
    */
   @Post('/component/add')

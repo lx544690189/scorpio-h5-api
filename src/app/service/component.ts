@@ -24,6 +24,25 @@ export class ComponentService {
     return result;
   }
 
+  async queryCategoryList({ current = 1, pageSize = 10, categoryName = '' }) {
+    const condition: {
+      categoryName?: RegExp;
+    } = {};
+    if (categoryName) {
+      condition.categoryName = new RegExp(categoryName, 'i');
+    }
+    const list = await this.componentModel
+      .find(condition)
+      .sort({ createdAt: -1 })
+      .skip(pageSize * (current - 1))
+      .limit(pageSize);
+    const total = await this.componentModel.find(condition).countDocuments();
+    return {
+      list,
+      total,
+    };
+  }
+
   async addComponent(categoryId: string, component: ComponentDTO) {
     console.log('component: ', component);
     const result = await this.componentModel.findOneAndUpdate(
@@ -47,16 +66,18 @@ export class ComponentService {
     const result = await this.componentModel.findOneAndUpdate(
       {
         _id: categoryId,
-        // child: {
-        //   $elemMatch: {
-        //     _id: component._id,
-        //   },
-        // },
+        children: {
+          $elemMatch: {
+            _id: component._id,
+          },
+        },
       },
       {
-        // $set: {
-        //   'child.&.name': component.name,
-        // },
+        $set: {
+          'children.$.name': component.name,
+          'children.$.cover': component.cover,
+          'children.$.mchema': component.schema,
+        },
       },
       {
         new: true,

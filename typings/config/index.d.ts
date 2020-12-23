@@ -13,6 +13,7 @@ import 'egg-schedule';
 import 'egg-jsonp';
 import 'egg-view';
 import 'midway-schedule';
+import 'egg-cors';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
@@ -29,5 +30,6 @@ declare module 'egg' {
     jsonp?: EggPluginItem;
     view?: EggPluginItem;
     schedulePlus?: EggPluginItem;
+    cors?: EggPluginItem;
   }
 }
