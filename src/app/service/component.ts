@@ -33,7 +33,7 @@ export class ComponentService {
     }
     const list = await this.componentModel
       .find(condition)
-      .sort({ createdAt: -1 })
+      // .sort({ createdAt: -1 })
       .skip(pageSize * (current - 1))
       .limit(pageSize);
     const total = await this.componentModel.find(condition).countDocuments();
@@ -84,5 +84,18 @@ export class ComponentService {
       }
     );
     return result;
+  }
+
+  async queryComponentById(componentId: string) {
+    const result = await this.componentModel.findOne({
+      children: {
+        $elemMatch: {
+          _id: componentId,
+        },
+      },
+    });
+    if (result) {
+      return result.children.find(item => item._id.equals(componentId));
+    }
   }
 }

@@ -12,7 +12,7 @@ import { ComponentCategoryDTO, ComponentDTO } from '../dto';
 import { ComponentService } from '../service/component';
 
 @Provide()
-@Controller('/component')
+@Controller('/category')
 export class ComponentController {
   @Inject()
   ctx: Context;
@@ -26,7 +26,7 @@ export class ComponentController {
   /**
    * 新增分类
    */
-  @Post('/category/add')
+  @Post('/add')
   async addCategory(@Body(ALL) category: ComponentCategoryDTO) {
     const { categoryName } = category;
     const exist = await this.componentService.queryCategoryByName(categoryName);
@@ -40,7 +40,7 @@ export class ComponentController {
   /**
    * 查询分类
    */
-  @Post('/category/list')
+  @Post('/list')
   async queryCategoryList(@Body() categoryName: string) {
     const result = await this.componentService.queryCategoryList({
       categoryName,
@@ -53,8 +53,8 @@ export class ComponentController {
    */
   @Post('/component/add')
   async addComponent(
-    @Body('categoryId') categoryId: string,
-    @Body('component') component: ComponentDTO
+    @Body() categoryId: string,
+    @Body() component: ComponentDTO
   ) {
     const result = await this.componentService.addComponent(
       categoryId,
@@ -68,13 +68,26 @@ export class ComponentController {
    */
   @Post('/component/edit')
   async editComponent(
-    @Body('categoryId') categoryId: string,
-    @Body('component') component: ComponentDTO
+    @Body() categoryId: string,
+    @Body() component: ComponentDTO
   ) {
     const result = await this.componentService.editComponent(
       categoryId,
       component
     );
     return this.helper.success(result);
+  }
+
+  /**
+   * 查询组件
+   */
+  @Post('/component/detail')
+  async queryComponent(@Body() componentId: string) {
+    const result = await this.componentService.queryComponentById(componentId);
+    if (result) {
+      return this.helper.success(result);
+    } else {
+      return this.helper.error('组件不存在');
+    }
   }
 }
