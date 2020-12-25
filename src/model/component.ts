@@ -27,7 +27,7 @@ export async function model(context: IApplicationContext) {
       cover: {
         type: String,
       },
-      mschema: {
+      generatorSchema: {
         type: Object,
       },
     },

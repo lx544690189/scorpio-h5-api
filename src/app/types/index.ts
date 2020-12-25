@@ -14,5 +14,5 @@ export interface IComponent {
   /**组件截图 */
   cover: string;
   /**组件名称 */
-  schema: object;
+  generatorSchema: object;
 }
