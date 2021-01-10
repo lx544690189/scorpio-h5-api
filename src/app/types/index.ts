@@ -16,3 +16,13 @@ export interface IComponent {
   /**组件名称 */
   generatorSchema: object;
 }
+
+export enum CATEGORY_STATUS {
+  initial = 1,
+  delete,
+}
+
+export enum COMPONENT_STATUS {
+  initial = 1,
+  delete,
+}

@@ -30,6 +30,10 @@ export async function model(context: IApplicationContext) {
       generatorSchema: {
         type: Object,
       },
+      status: {
+        type: Number,
+        default: 1,
+      },
     },
     {
       timestamps: true,
@@ -45,6 +49,10 @@ export async function model(context: IApplicationContext) {
       children: {
         type: [component],
         default: [],
+      },
+      status: {
+        type: Number,
+        default: 1,
       },
     },
     {

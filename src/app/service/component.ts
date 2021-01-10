@@ -1,6 +1,8 @@
+import { COMPONENT_STATUS } from './../types/index';
 import { ComponentCategoryDTO, ComponentDTO } from './../dto/index';
 import { Inject, Provide } from '@midwayjs/decorator';
 import * as mongoose from 'mongoose';
+import { CATEGORY_STATUS } from '../types';
 
 @Provide()
 export class ComponentService {
@@ -20,6 +22,7 @@ export class ComponentService {
   async queryCategoryByName(categoryName: string) {
     const result = await this.componentModel.findOne({
       categoryName,
+      status: CATEGORY_STATUS.initial,
     });
     return result;
   }
@@ -27,7 +30,10 @@ export class ComponentService {
   async queryCategoryList({ current = 1, pageSize = 10, categoryName = '' }) {
     const condition: {
       categoryName?: RegExp;
-    } = {};
+      status: CATEGORY_STATUS;
+    } = {
+      status: CATEGORY_STATUS.initial,
+    };
     if (categoryName) {
       condition.categoryName = new RegExp(categoryName, 'i');
     }
@@ -43,15 +49,45 @@ export class ComponentService {
     };
   }
 
+  async editCategory(_id: string, categoryName: string) {
+    const result = await this.componentModel.findOneAndUpdate(
+      {
+        _id,
+      },
+      {
+        $set: {
+          categoryName,
+        },
+      }
+    );
+    return result;
+  }
+
+  async deleteCategory(_id: string) {
+    const result = await this.componentModel.findOneAndUpdate(
+      {
+        _id,
+      },
+      {
+        $set: {
+          status: CATEGORY_STATUS.delete,
+        },
+      }
+    );
+    return result;
+  }
+
   async addComponent(categoryId: string, component: ComponentDTO) {
-    console.log('component: ', component);
     const result = await this.componentModel.findOneAndUpdate(
       {
         _id: categoryId,
       },
       {
         $push: {
-          children: component,
+          children: {
+            ...component,
+            status: COMPONENT_STATUS.initial,
+          },
         },
       } as any,
       {

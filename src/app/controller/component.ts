@@ -49,6 +49,35 @@ export class ComponentController {
   }
 
   /**
+   * 修改分类
+   */
+  @Post('/edit')
+  async editCategory(@Body() categoryId: string, @Body() categoryName: string) {
+    const result = await this.componentService.editCategory(
+      categoryId,
+      categoryName
+    );
+    if (result) {
+      return this.helper.success();
+    } else {
+      return this.helper.error('修改失败');
+    }
+  }
+
+  /**
+   * 删除分类
+   */
+  @Post('/delete')
+  async deleteCategory(@Body() categoryId: string) {
+    const result = await this.componentService.deleteCategory(categoryId);
+    if (result) {
+      return this.helper.success();
+    } else {
+      return this.helper.error('修改失败');
+    }
+  }
+
+  /**
    * 新增组件
    */
   @Post('/component/add')
