@@ -1,4 +1,4 @@
-import { Inject, Provide } from '@midwayjs/decorator';
+import { Provide } from '@midwayjs/decorator';
 import { ErrorShowType } from '../../app/types/common';
 
 @Provide()

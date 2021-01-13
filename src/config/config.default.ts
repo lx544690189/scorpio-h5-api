@@ -1,4 +1,5 @@
 import { Context, EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
+import { ErrorShowType } from '../app/types/common';
 
 export type DefaultConfig = PowerPartial<EggAppConfig>;
 
@@ -25,20 +26,21 @@ export default (appInfo: EggAppInfo) => {
     json(err: any, ctx: Context) {
       if (err.status === 401) {
         ctx.body = {
-          code: 14001,
-          errmsg: '登录状态失效，请重新登录',
-          trace: err.message,
+          success: false,
+          errorMessage: '登录状态失效，请重新登录',
+          showType: ErrorShowType.ERROR_MESSAGE,
         };
       } else if (err.status === 500) {
         ctx.body = {
-          code: 2001,
-          errmsg: '系统开小差了,请稍后再试',
-          trace: err.message,
+          success: false,
+          errorMessage: err.message,
+          showType: ErrorShowType.ERROR_MESSAGE,
         };
       } else if (err.status !== 200) {
         ctx.body = {
-          code: err.status,
-          errmsg: err.message,
+          success: false,
+          errorMessage: err.message,
+          showType: ErrorShowType.ERROR_MESSAGE,
         };
       }
       ctx.status = 200;

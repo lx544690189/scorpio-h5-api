@@ -5,7 +5,7 @@ import { MongooseConnection } from '../lib/mongoose';
 
 providerWrapper([
   {
-    id: 'componentModel',
+    id: 'categoryModel',
     provider: model,
     scope: ScopeEnum.Singleton,
   },
@@ -15,23 +15,15 @@ export async function model(context: IApplicationContext) {
     'mongooseConnection'
   );
   const {
-    mongoose: { Schema, Types },
+    mongoose: { Schema },
     connection,
   } = mongooseConnection;
 
   const schema = new Schema(
     {
-      categoryId: {
-        type: Types.ObjectId,
-      },
       name: {
         type: String,
-      },
-      cover: {
-        type: String,
-      },
-      generatorSchema: {
-        type: Object,
+        required: true,
       },
       status: {
         type: Number,
@@ -42,5 +34,5 @@ export async function model(context: IApplicationContext) {
       timestamps: true,
     }
   );
-  return connection.model('component', schema, 'component');
+  return connection.model('category', schema, 'category');
 }
