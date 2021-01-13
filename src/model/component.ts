@@ -33,6 +33,12 @@ export async function model(context: IApplicationContext) {
       generatorSchema: {
         type: Object,
       },
+      props: {
+        type: Object,
+      },
+      containerProps: {
+        type: Object,
+      },
       status: {
         type: Number,
         default: 1,

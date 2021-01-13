@@ -18,7 +18,13 @@ export class ComponentDTO {
   /**组件截图 */
   @Rule(RuleType.string())
   cover: string;
-  /**Schema */
+  /**组件Schema */
   @Rule(RuleType.object())
   generatorSchema: object;
+  /**组件props */
+  @Rule(RuleType.object())
+  props: object;
+  /**组件containerProps */
+  @Rule(RuleType.object())
+  containerProps: object;
 }

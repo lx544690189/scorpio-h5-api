@@ -26,6 +26,8 @@ export class ComponentService {
           name: component.name,
           cover: component.cover,
           generatorSchema: component.generatorSchema,
+          props: component.props,
+          containerProps: component.containerProps,
         },
       },
       {
