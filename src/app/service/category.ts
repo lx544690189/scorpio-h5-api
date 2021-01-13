@@ -86,6 +86,12 @@ export class CategoryService {
         },
       },
     ]);
-    return result;
+    // 过滤已删除组件
+    return result.map(category => {
+      category.components = category.components.filter(
+        component => component.status === CATEGORY_STATUS.initial
+      );
+      return category;
+    });
   }
 }
