@@ -13,7 +13,7 @@ import { PageService } from '../service/page';
 
 @Provide()
 @Controller('/page')
-export class ComponentController {
+export class PageController {
   @Inject()
   ctx: Context;
 
