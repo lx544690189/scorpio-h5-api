@@ -28,3 +28,11 @@ export class ComponentDTO {
   @Rule(RuleType.object())
   containerProps: object;
 }
+
+export class PageDTO {
+  /**id */
+  @Rule(RuleType.string())
+  _id: string;
+  @Rule(RuleType.string())
+  pageSchema: string;
+}

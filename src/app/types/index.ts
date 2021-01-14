@@ -26,3 +26,8 @@ export enum COMPONENT_STATUS {
   initial = 1,
   delete,
 }
+
+export enum PAGE_STATUS {
+  initial = 1,
+  delete,
+}
