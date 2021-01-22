@@ -25,9 +25,6 @@ export async function model(context: IApplicationContext) {
         type: Array,
         default: [],
       },
-      cover: {
-        type: String,
-      },
       history: {
         type: Array,
         default: [],

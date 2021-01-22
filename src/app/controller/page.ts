@@ -24,6 +24,15 @@ export class PageController {
   helper: Helper;
 
   /**
+   * 查询列表
+   */
+  @Post('/list')
+  async queryList() {
+    const result = await this.pageService.queryList({});
+    return this.helper.success(result);
+  }
+
+  /**
    * 新增
    */
   @Post('/add')
