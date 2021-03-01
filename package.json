@@ -1,5 +1,5 @@
 {
-  "name": "my_midway_project",
+  "name": "design_api",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -28,8 +28,8 @@
     "node": ">=12.0.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=midway-server-my_midway_project --framework=@midwayjs/web",
-    "stop": "egg-scripts stop --title=midway-server-my_midway_project",
+    "start": "egg-scripts start --daemon --title=midway-server-design_api --framework=@midwayjs/web --port=4002",
+    "stop": "egg-scripts stop --title=midway-server-design_api",
     "start_build": "npm run build && cross-env NODE_ENV=development midway-bin dev",
     "dev": "cross-env ets && cross-env NODE_ENV=local midway-bin dev --ts",
     "test": "midway-bin test",
