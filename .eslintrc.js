@@ -1,4 +1,4 @@
-{
+module.exports = {
   "extends": "./node_modules/mwts/",
   "ignorePatterns": [
     "node_modules",
@@ -11,10 +11,11 @@
     "jest": true
   },
   "rules": {
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "prettier/prettier": [
       "error",
       {
-        "endOfLine": "auto"
+        "endOfLine": "auto",
       }
     ]
   }
