@@ -27,8 +27,8 @@ export class PageController {
    * 查询列表
    */
   @Post('/list')
-  async queryList() {
-    const result = await this.pageService.queryList({});
+  async queryList(@Body() isTemplate: boolean) {
+    const result = await this.pageService.queryList({ isTemplate });
     return this.helper.success(result);
   }
 
@@ -69,6 +69,15 @@ export class PageController {
   @Post('/delete')
   async deleteComponent(@Body() _id: string) {
     const result = await this.pageService.delete(_id);
+    return this.helper.success(result);
+  }
+
+  /**
+   * 是否设为模板
+   */
+  @Post('/togglePageTemplate')
+  async togglePageTemplate(@Body() _id: string, @Body() isTemplate: boolean) {
+    const result = await this.pageService.editIsTemplate(_id, isTemplate);
     return this.helper.success(result);
   }
 }

@@ -29,6 +29,10 @@ export async function model(context: IApplicationContext) {
         type: Array,
         default: [],
       },
+      isTemplate: {
+        type: Boolean,
+        default: false,
+      },
       status: {
         type: Number,
         default: 1,

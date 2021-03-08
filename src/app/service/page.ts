@@ -8,12 +8,17 @@ export class PageService {
   @Inject()
   private pageModel!: typeof mongoose.Model;
 
-  async queryList({ current = 1, pageSize = 10, name = '' }) {
+  async queryList({ current = 1, pageSize = 10, isTemplate }) {
     const condition: {
       status: PAGE_STATUS;
+      isTemplate?: boolean;
     } = {
       status: PAGE_STATUS.initial,
     };
+    if (isTemplate !== undefined) {
+      condition.isTemplate = isTemplate;
+    }
+    console.log('condition: ', condition);
     const list = await this.pageModel
       .find(condition)
       .sort({ createdAt: -1 })
@@ -62,6 +67,23 @@ export class PageService {
         $set: {
           status: PAGE_STATUS.delete,
         },
+      }
+    );
+    return result;
+  }
+
+  async editIsTemplate(_id: string, isTemplate: boolean) {
+    const result = await this.pageModel.findOneAndUpdate(
+      {
+        _id,
+      },
+      {
+        $set: {
+          isTemplate,
+        },
+      },
+      {
+        new: true,
       }
     );
     return result;
