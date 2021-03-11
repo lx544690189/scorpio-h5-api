@@ -20,12 +20,7 @@ export class CategoryController {
    */
   @Post('/add')
   async addCategory(@Body() name: string) {
-    const exist = await this.categoryService.queryCategoryByName(name);
-    if (exist) {
-      return this.helper.error('名称已存在');
-    }
-    const result = await this.categoryService.addCategory({ name });
-    return this.helper.success(result);
+    return this.helper.error('演示项目，不允许操作');
   }
 
   /**
@@ -44,12 +39,7 @@ export class CategoryController {
    */
   @Post('/edit')
   async editCategory(@Body() _id: string, @Body() name: string) {
-    const result = await this.categoryService.editCategory(_id, name);
-    if (result) {
-      return this.helper.success();
-    } else {
-      return this.helper.error('修改失败');
-    }
+    return this.helper.error('演示项目，不允许操作');
   }
 
   /**
@@ -57,12 +47,7 @@ export class CategoryController {
    */
   @Post('/delete')
   async deleteCategory(@Body() _id: string) {
-    const result = await this.categoryService.deleteCategory(_id);
-    if (result) {
-      return this.helper.success();
-    } else {
-      return this.helper.error('修改失败');
-    }
+    return this.helper.error('演示项目，不允许操作');
   }
 
   /**

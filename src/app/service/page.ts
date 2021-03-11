@@ -8,7 +8,7 @@ export class PageService {
   @Inject()
   private pageModel!: typeof mongoose.Model;
 
-  async queryList({ current = 1, pageSize = 10, isTemplate }) {
+  async queryList({ current = 1, pageSize = 100, isTemplate }) {
     const condition: {
       status: PAGE_STATUS;
       isTemplate?: boolean;
@@ -21,7 +21,7 @@ export class PageService {
     console.log('condition: ', condition);
     const list = await this.pageModel
       .find(condition)
-      .sort({ createdAt: -1 })
+      .sort({ createdAt: 1 })
       .skip(pageSize * (current - 1))
       .limit(pageSize);
     const total = await this.pageModel.find(condition).countDocuments();

@@ -31,14 +31,7 @@ export class ComponentController {
    */
   @Post('/add')
   async addComponent(@Body(ALL) component: ComponentDTO) {
-    const category = await this.categoryService.queryCategoryById(
-      component.categoryId
-    );
-    if (!category) {
-      return this.helper.error('分类ID不存在！');
-    }
-    const result = await this.componentService.addComponent(component);
-    return this.helper.success(result);
+    return this.helper.error('演示项目，不允许操作');
   }
 
   /**
@@ -46,8 +39,7 @@ export class ComponentController {
    */
   @Post('/edit')
   async editComponent(@Body(ALL) component: ComponentDTO) {
-    const result = await this.componentService.editComponent(component);
-    return this.helper.success(result);
+    return this.helper.error('演示项目，不允许操作');
   }
 
   /**
@@ -68,7 +60,6 @@ export class ComponentController {
    */
   @Post('/delete')
   async deleteComponent(@Body() _id: string) {
-    const result = await this.componentService.deleteComponent(_id);
-    return this.helper.success(result);
+    return this.helper.error('演示项目，不允许操作');
   }
 }
