@@ -1,4 +1,5 @@
 import { Context, EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
+import * as mongoose from 'mongoose';
 import { ErrorShowType } from '../app/types/common';
 
 export type DefaultConfig = PowerPartial<EggAppConfig>;
@@ -11,6 +12,15 @@ export default (appInfo: EggAppInfo) => {
 
   // add your config here
   config.middleware = [];
+
+  config.mongoose = {
+    url: '', // 这里填写你的mongo地址
+    options: {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    } as mongoose.ConnectionOptions,
+  };
 
   config.onerror = {
     accepts(ctx: Context) {
